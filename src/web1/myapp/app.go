@@ -7,6 +7,10 @@ import (
 	"encoding/json"
 )
 
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello World")
+}
+
 type fooHandler struct {}
 
 type User struct {
@@ -42,9 +46,7 @@ func barHanlder(w http.ResponseWriter, r *http.Request) {
 func NewHttpHandler() http.Handler {
 	mux := http.NewServeMux() // mux instance(router)를 만들어서 사용
 	// Handler를 function 형태로 직접 등록. "/" 경로 = index 경로, 첫번째 page 경로에 대한 request가 왔을때 어떤 function을 할지
-	mux.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello World")
-	})
+	mux.HandleFunc("/", indexHandler)
 
 	mux.HandleFunc("/bar", barHanlder)
 
